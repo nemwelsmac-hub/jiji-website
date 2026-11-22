@@ -2,7 +2,7 @@
 const translations = {
     en: {
         lang_title_1: "Choose your", lang_title_2: "language", lang_subtitle: "Select your language to continue", lang_footer: "You can change it anytime",
-        calc_welcome: "Welcome to MTN MoMo Loan and Services", calc_welcome_sub: "Get loans easily through MTN MoMo Loan and Services",
+        calc_welcome: "MTN MoMo Loans and Advances", calc_welcome_sub: "Get loans easily through MTN MoMo",
         calc_title: "Loan Calculator", calc_amount: "Amount", calc_term: "Term", calc_monthly: "Monthly Payment", calc_btn: "START APPLICATION",
         form_step1: "Step 1 of 3", form_step2: "Step 2 of 3", form_step3: "Step 3 of 3",
         form_loan_details: "Loan Details", form_loan_type: "Loan Type", form_loan_business: "Business Loan", form_loan_personal: "Personal Loan", form_loan_emergency: "Emergency Loan", form_loan_amount: "Loan Amount (XAF)", form_loan_term: "Loan Term", form_loan_purpose: "Purpose of Loan", 
@@ -17,7 +17,7 @@ const translations = {
     },
     fr: {
         lang_title_1: "Choisissez votre", lang_title_2: "langue", lang_subtitle: "Sélectionnez votre langue pour continuer", lang_footer: "Vous pouvez le changer à tout moment",
-        calc_welcome: "Bienvenue à MTN MoMo Prêt et Services", calc_welcome_sub: "Obtenez des prêts facilement grâce à MTN MoMo",
+        calc_welcome: "MTN MoMo Prêts et Avances", calc_welcome_sub: "Obtenez des prêts facilement grâce à MTN MoMo",
         calc_title: "Calculateur de prêt", calc_amount: "Montant", calc_term: "Durée", calc_monthly: "Paiement mensuel", calc_btn: "COMMENCER LA DEMANDE",
         form_step1: "Étape 1 sur 3", form_step2: "Étape 2 sur 3", form_step3: "Étape 3 sur 3",
         form_loan_details: "Détails du prêt", form_loan_type: "Type de prêt", form_loan_business: "Prêt commercial", form_loan_personal: "Prêt personnel", form_loan_emergency: "Prêt d'urgence", form_loan_amount: "Montant du prêt (XAF)", form_loan_term: "Durée du prêt", form_loan_purpose: "Objet du prêt",
@@ -32,7 +32,7 @@ const translations = {
     },
     cam: {
         lang_title_1: "Choose your", lang_title_2: "langue", lang_subtitle: "Choisis ton langue make we move", lang_footer: "You fit change am anytime",
-        calc_welcome: "Welcome to MTN MoMo Loan and Services", calc_welcome_sub: "Get loan sharp sharp through MTN MoMo",
+        calc_welcome: "MTN MoMo Loans and Advances", calc_welcome_sub: "Get loan sharp sharp through MTN MoMo",
         calc_title: "Loan Calculator", calc_amount: "Amount", calc_term: "How long", calc_monthly: "You go pay every month", calc_btn: "START APPLICATION",
         form_step1: "Step 1 of 3", form_step2: "Step 2 of 3", form_step3: "Step 3 of 3",
         form_loan_details: "Loan Details", form_loan_type: "Which kind loan", form_loan_business: "Business Loan", form_loan_personal: "Personal Loan", form_loan_emergency: "Emergency Loan", form_loan_amount: "Loan Amount (XAF)", form_loan_term: "How long", form_loan_purpose: "Why you wan take am",
@@ -47,22 +47,18 @@ const translations = {
     }
 };
 
-let currentLang = 'en'; // Default
+let currentLang = 'en'; 
 
-// --- Apply Translation ---
 function setLanguage(lang) {
     currentLang = lang;
     
-    // Update all text elements
     document.querySelectorAll('[data-translate]').forEach(el => {
         const key = el.getAttribute('data-translate');
         if (translations[lang] && translations[lang][key]) {
-            // Use innerHTML so we can keep the <br> and <strong> tags in the SMS text
             el.innerHTML = translations[lang][key];
         }
     });
 
-    // Update all placeholders
     document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
         const key = el.getAttribute('data-translate-placeholder');
         if (translations[lang] && translations[lang][key]) {
@@ -73,7 +69,6 @@ function setLanguage(lang) {
     showScreen('main-screen');
 }
 
-// --- Screen Navigation ---
 function showScreen(screenId) {
     document.querySelectorAll('.dark-screen').forEach(screen => {
         screen.classList.remove('active');
@@ -81,7 +76,6 @@ function showScreen(screenId) {
     document.getElementById(screenId).classList.add('active');
 }
 
-// --- Loan Calculator Logic ---
 function updateLoanValue() {
     const amountSlider = document.getElementById('loanAmount');
     const termSlider = document.getElementById('loanTerm');
@@ -105,7 +99,6 @@ function updateLoanValue() {
 
 updateLoanValue();
 
-// --- Form Transition Logic ---
 function goToForm() {
     const amount = document.getElementById('loanAmount').value;
     const term = document.getElementById('loanTerm').value;
@@ -116,7 +109,6 @@ function goToForm() {
     showScreen('form-screen');
 }
 
-// --- Multi-Step Form Logic ---
 function nextStep(stepNumber) {
     document.querySelectorAll('.form-step').forEach(step => {
         step.classList.remove('active');
@@ -161,7 +153,6 @@ function prevStep(stepNumber) {
     }
 }
 
-// --- Form Submission & Simulation ---
 function submitApplication() {
     showScreen('processing-screen');
 
