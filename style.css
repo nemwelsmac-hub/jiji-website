@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Mobile App Simulation Container */
+.screen {
+    display: none; /* Hidden by default */
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    min-height: 600px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Typography */
+h2 { color: #004f9f; margin-bottom: 10px; }
+h3 { color: #333; margin-bottom: 20px; }
+h4 { color: #555; margin-bottom: 15px; }
+p { color: #666; margin-bottom: 15px; font-size: 14px; }
+small { color: #999; margin-top: 20px; }
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #ffcc00; /* MTN Yellow */
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover { background-color: #e6b800; }
+
+/* Form Inputs */
+input[type="text"], input[type="tel"], select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* Calculator Box */
+.calculator-box {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 15px 0;
+}
+
+/* Form Steps */
+.form-step {
+    display: none;
+    width: 100%;
+}
+
+.form-step.active {
+    display: block;
+}
+
+/* Loader (Processing Screen) */
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #004f9f;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-top: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

