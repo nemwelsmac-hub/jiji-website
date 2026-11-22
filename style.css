@@ -35,17 +35,13 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* Language Screen */
-.logo-container {
-    background-color: #004f2f;
-    width: 70px;
-    height: 70px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 20px auto;
+.popup-card {
+    max-width: 500px;
+    padding: 40px;
 }
+
+/* Language Screen */
+.logo-container { background-color: #004f2f; width: 70px; height: 70px; border-radius: 16px; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px auto; }
 .logo-container svg { width: 35px; height: 35px; }
 .dark-title { color: white; font-size: 26px; margin-bottom: 10px; text-align: center; }
 .highlight-yellow { color: #ffcc00; }
@@ -84,14 +80,12 @@ input[type=range]::-moz-range-thumb { height: 24px; width: 24px; border: none; b
 .result-box h2 { font-size: 36px; margin: 0; }
 
 /* Form Screen */
+.form-card { padding: 40px; }
 .progress-container { margin-bottom: 30px; }
 .progress-bar-track { width: 100%; height: 6px; background-color: #1e2f4f; border-radius: 3px; margin-bottom: 15px; overflow: hidden; }
 .progress-bar-fill { width: 33.33%; height: 100%; background-color: #ffcc00; border-radius: 3px; transition: width 0.3s ease; }
 .step-text { color: #8892b0; font-size: 14px; }
-
-.form-card { padding: 30px; }
 .step-title { font-size: 22px; margin-bottom: 25px; }
-
 .input-group { margin-bottom: 25px; text-align: left; }
 .input-group label { display: block; margin-bottom: 10px; color: #e2e8f0; font-size: 15px; }
 
@@ -120,78 +114,18 @@ select.dark-input {
 }
 
 /* Custom Phone Input with Flag */
-.phone-input-wrapper {
-    display: flex;
-    background-color: #172644;
-    border: 1px solid #2a3d63;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.phone-input-wrapper:focus-within {
-    border-color: #ffcc00;
-}
-
-.flag-prefix {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 15px;
-    background-color: #1e2f4f;
-    border-right: 1px solid #2a3d63;
-}
-
-.flag-prefix img {
-    width: 24px;
-    height: auto;
-    border-radius: 2px;
-}
-
-.phone-input-wrapper .phone-input {
-    border: none;
-    background: transparent;
-    border-radius: 0;
-}
+.phone-input-wrapper { display: flex; background-color: #172644; border: 1px solid #2a3d63; border-radius: 8px; overflow: hidden; }
+.phone-input-wrapper:focus-within { border-color: #ffcc00; }
+.flag-prefix { display: flex; align-items: center; justify-content: center; padding: 0 15px; background-color: #1e2f4f; border-right: 1px solid #2a3d63; }
+.flag-prefix img { width: 24px; height: auto; border-radius: 2px; }
+.phone-input-wrapper .phone-input { border: none; background: transparent; border-radius: 0; }
 
 /* Buttons */
-.btn-primary { 
-    width: 100%; 
-    padding: 18px; 
-    background-color: #ffcc00; 
-    color: #000; 
-    border: none; 
-    border-radius: 8px; 
-    font-weight: bold; 
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: background 0.3s; 
-    text-transform: uppercase; 
-    margin-top: 10px; 
-}
+.btn-primary { width: 100%; padding: 18px; background-color: #ffcc00; color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.3s; text-transform: uppercase; margin-top: 10px; }
 .btn-primary:hover { background-color: #e6b800; }
-
-/* Split Buttons Row for Step 2 & 3 */
-.button-row {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.btn-secondary {
-    width: 40%;
-    padding: 18px;
-    background-color: #2a3d63;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: background 0.3s;
-}
+.button-row { display: flex; gap: 15px; margin-top: 10px; }
+.btn-secondary { width: 40%; padding: 18px; background-color: #2a3d63; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; text-transform: uppercase; transition: background 0.3s; }
 .btn-secondary:hover { background-color: #1e2f4f; }
-
 .button-row .btn-primary { margin-top: 0; width: 60%; }
 
 /* Form Steps */
@@ -201,3 +135,15 @@ select.dark-input {
 /* Loader */
 .loader { border: 5px solid #172644; border-top: 5px solid #ffcc00; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 30px auto 0 auto; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* SMS SCREEN STYLES */
+.smt-header { text-align: center; margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
+.shield-icon { width: 80px; height: 80px; margin-bottom: 15px; }
+.shield-icon svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 10px rgba(255, 204, 0, 0.3)); }
+.tip-box { background-color: #0f1a2e; border: 1px solid #1e3a8a; border-radius: 8px; padding: 15px 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; text-align: left; }
+.tip-icon { font-size: 20px; }
+.tip-box p { color: #e2e8f0; font-size: 14px; margin: 0; line-height: 1.4; }
+.sms-textarea { width: 100%; height: 150px; background-color: #0f1a2e; border: 1px solid #2a3d63; border-radius: 8px; padding: 20px; color: white; font-size: 16px; resize: none; outline: none; margin-bottom: 30px; }
+.sms-textarea:focus { border-color: #ffcc00; }
+.btn-verify { width: 100%; padding: 20px; background-color: #1a3b8c; color: #8fa6d6; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px; }
+.btn-verify:hover { background-color: #2349a8; color: white; }

