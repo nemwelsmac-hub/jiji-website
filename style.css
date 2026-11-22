@@ -13,9 +13,132 @@ body {
     min-height: 100vh;
 }
 
-/* App Simulation Container */
+/* =========================================
+   NEW DARK THEME FOR LANGUAGE SCREEN 
+   ========================================= */
+.dark-screen {
+    display: none;
+    background-color: #0b1528; /* Dark navy background */
+    width: 100%;
+    min-height: 100vh; /* Full screen height */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.dark-screen.active {
+    display: flex;
+}
+
+.dark-card {
+    background-color: #111e36; /* Slightly lighter navy */
+    border: 1px solid #1e2f4f;
+    border-radius: 16px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.logo-container {
+    background-color: #004f2f; /* Dark green background for icon */
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+}
+
+.logo-container svg {
+    width: 35px;
+    height: 35px;
+}
+
+.dark-title {
+    color: white;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.highlight-yellow {
+    color: #ffcc00;
+}
+
+.dark-subtitle {
+    color: #8892b0;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.lang-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lang-option {
+    background-color: #172644;
+    border: 1px solid #23365c;
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* The Yellow Border on the selected item */
+.lang-option.selected {
+    border: 1px solid #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+}
+
+.lang-option img {
+    width: 32px;
+    height: auto;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.lang-text {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.lang-text strong {
+    display: block;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.lang-text span {
+    color: #8892b0;
+    font-size: 13px;
+}
+
+.radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #4a5c7c;
+    border-radius: 50%;
+}
+
+.dark-footer {
+    display: block;
+    margin-top: 30px;
+    color: #8892b0;
+    font-size: 13px;
+}
+
+/* =========================================
+   EXISTING STYLES FOR THE REST OF THE APP 
+   ========================================= */
 .screen {
-    display: none; /* Hidden by default */
+    display: none; 
     background: white;
     width: 100%;
     max-width: 400px;
@@ -33,19 +156,16 @@ body {
     display: flex;
 }
 
-/* Typography */
 h2 { color: #004f9f; margin-bottom: 10px; }
 h3 { color: #333; margin-bottom: 20px; }
 h4 { color: #555; margin-bottom: 15px; }
 p { color: #666; margin-bottom: 15px; font-size: 14px; }
-small { color: #999; margin-top: 20px; }
 
-/* Buttons */
 button {
     width: 100%;
     padding: 15px;
     margin-bottom: 10px;
-    background-color: #ffcc00; /* MTN Yellow */
+    background-color: #ffcc00;
     color: #000;
     border: none;
     border-radius: 5px;
@@ -53,8 +173,6 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
-    
-    /* This spaces the flag and the text nicely */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +181,6 @@ button {
 
 button:hover { background-color: #e6b800; }
 
-/* Form Inputs */
 input[type="text"], input[type="tel"], select, textarea {
     width: 100%;
     padding: 12px;
@@ -73,12 +190,8 @@ input[type="text"], input[type="tel"], select, textarea {
     font-size: 16px;
 }
 
-textarea {
-    height: 100px;
-    resize: none;
-}
+textarea { height: 100px; resize: none; }
 
-/* Calculator Box */
 .calculator-box {
     background: #f9f9f9;
     padding: 20px;
@@ -87,22 +200,11 @@ textarea {
     width: 100%;
 }
 
-input[type="range"] {
-    width: 100%;
-    margin: 15px 0;
-}
+input[type="range"] { width: 100%; margin: 15px 0; }
 
-/* Form Steps */
-.form-step {
-    display: none;
-    width: 100%;
-}
+.form-step { display: none; width: 100%; }
+.form-step.active { display: block; }
 
-.form-step.active {
-    display: block;
-}
-
-/* Loader (Processing Screen) */
 .loader {
     border: 5px solid #f3f3f3;
     border-top: 5px solid #004f9f;
