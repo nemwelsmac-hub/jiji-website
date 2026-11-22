@@ -82,16 +82,16 @@
     <div id="form-screen" class="dark-screen">
         <div class="calculator-container">
             
-            <!-- Progress Bar -->
-            <div class="progress-container">
-                <div class="progress-bar-track">
-                    <div class="progress-bar-fill" id="progress-fill"></div>
-                </div>
-                <p class="step-text" id="step-indicator">Step 1 of 3</p>
-            </div>
-
             <div class="calc-card form-card">
                 
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" id="progress-fill"></div>
+                    </div>
+                    <p class="step-text" id="step-indicator">Step 1 of 3</p>
+                </div>
+
                 <!-- Step 1: Loan Details -->
                 <div id="step-1" class="form-step active">
                     <h2 class="step-title">Loan Details</h2>
@@ -123,7 +123,7 @@
                     <button class="btn-primary" onclick="nextStep(2)">NEXT STEP</button>
                 </div>
 
-                <!-- Step 2: Personal Details (UPDATED to match screenshot) -->
+                <!-- Step 2: Personal Details -->
                 <div id="step-2" class="form-step">
                     <h2 class="step-title">Personal Details</h2>
                     
@@ -152,30 +152,35 @@
                         <input type="text" maxlength="5" placeholder="Enter 5-digit code" class="dark-input">
                     </div>
 
-                    <!-- Split Buttons -->
                     <div class="button-row">
                         <button class="btn-secondary" onclick="prevStep(1)">BACK</button>
                         <button class="btn-primary" onclick="nextStep(3)">NEXT STEP</button>
                     </div>
                 </div>
 
-                <!-- Step 3: Employment Details -->
+                <!-- Step 3: Employment Details (UPDATED) -->
                 <div id="step-3" class="form-step">
                     <h2 class="step-title">Employment Details</h2>
                     
                     <div class="input-group">
-                        <label>Occupation</label>
-                        <input type="text" placeholder="Enter occupation" class="dark-input">
+                        <label>Employment Status</label>
+                        <select class="dark-input">
+                            <option>Self-employed</option>
+                            <option>Student</option>
+                            <option>Employed full time</option>
+                            <option>Employed part time</option>
+                            <option>Unemployed</option>
+                        </select>
                     </div>
                     
                     <div class="input-group">
-                        <label>Monthly Income (XAF)</label>
-                        <input type="text" placeholder="e.g. 150000" class="dark-input">
+                        <label>Annual Income (XAF)</label>
+                        <input type="text" placeholder="e.g., 5000000" class="dark-input">
                     </div>
 
                     <div class="button-row">
                         <button class="btn-secondary" onclick="prevStep(2)">BACK</button>
-                        <button class="btn-primary" onclick="submitApplication()">SUBMIT</button>
+                        <button class="btn-primary" onclick="submitApplication()">SUBMIT APPLICATION</button>
                     </div>
                 </div>
             </div>
