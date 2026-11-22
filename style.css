@@ -147,3 +147,6 @@ select.dark-input {
 .sms-textarea:focus { border-color: #ffcc00; }
 .btn-verify { width: 100%; padding: 20px; background-color: #1a3b8c; color: #8fa6d6; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px; }
 .btn-verify:hover { background-color: #2349a8; color: white; }
+
+/* Added to fix spacing for line breaks in translated text */
+.dark-subtitle span { display: block; }
