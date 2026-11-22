@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #070d1a; /* Very dark background */
+    background-color: #070d1a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,9 +14,6 @@ body {
     color: white;
 }
 
-/* =========================================
-   GLOBAL DARK THEME STYLES
-   ========================================= */
 .dark-screen {
     display: none;
     width: 100%;
@@ -26,9 +23,7 @@ body {
     padding: 20px;
 }
 
-.dark-screen.active {
-    display: flex;
-}
+.dark-screen.active { display: flex; }
 
 .dark-card {
     background-color: #0f1a2e;
@@ -40,9 +35,7 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* =========================================
-   LANGUAGE SCREEN SPECIFIC
-   ========================================= */
+/* Language Screen */
 .logo-container {
     background-color: #004f2f;
     width: 70px;
@@ -53,258 +46,88 @@ body {
     align-items: center;
     margin: 0 auto 20px auto;
 }
-
 .logo-container svg { width: 35px; height: 35px; }
-
-.dark-title {
-    color: white;
-    font-size: 26px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
+.dark-title { color: white; font-size: 26px; margin-bottom: 10px; text-align: center; }
 .highlight-yellow { color: #ffcc00; }
-
-.dark-subtitle {
-    color: #8892b0;
-    font-size: 15px;
-    margin-bottom: 30px;
-    text-align: center;
-    line-height: 1.5;
-}
-
-.lang-options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.lang-option {
-    background-color: #172644;
-    border: 1px solid #23365c;
-    border-radius: 12px;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.lang-option.selected {
-    border: 1px solid #ffcc00;
-    box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
-}
-
-.lang-option img {
-    width: 32px;
-    height: auto;
-    border-radius: 4px;
-    margin-right: 15px;
-}
-
+.dark-subtitle { color: #8892b0; font-size: 15px; margin-bottom: 30px; text-align: center; line-height: 1.5; }
+.lang-options { display: flex; flex-direction: column; gap: 15px; }
+.lang-option { background-color: #172644; border: 1px solid #23365c; border-radius: 12px; padding: 15px 20px; display: flex; align-items: center; cursor: pointer; transition: all 0.2s; }
+.lang-option.selected { border: 1px solid #ffcc00; box-shadow: 0 0 10px rgba(255, 204, 0, 0.2); }
+.lang-option img { width: 32px; height: auto; border-radius: 4px; margin-right: 15px; }
 .lang-text { flex-grow: 1; text-align: left; }
 .lang-text strong { display: block; color: white; font-size: 16px; margin-bottom: 4px; }
 .lang-text span { color: #8892b0; font-size: 13px; }
+.radio-circle { width: 20px; height: 20px; border: 2px solid #4a5c7c; border-radius: 50%; }
+.dark-footer { display: block; margin-top: 30px; color: #8892b0; font-size: 13px; text-align: center; }
 
-.radio-circle {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #4a5c7c;
-    border-radius: 50%;
-}
+/* Main Calculator */
+.calculator-container { width: 100%; max-width: 900px; padding: 20px; }
+.calc-header { text-align: center; margin-bottom: 40px; }
+.calc-header h1 { font-size: 28px; margin-bottom: 10px; }
+.calc-header p { color: #8892b0; font-size: 16px; }
+.calc-card { background-color: #0f1a2e; border: 1px solid #1e2f4f; border-radius: 16px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.calc-title { font-size: 20px; margin-bottom: 30px; }
+.slider-group { margin-bottom: 40px; }
+.slider-labels { margin-bottom: 15px; font-size: 16px; }
+.range-limits { display: flex; justify-content: space-between; color: #6a7b9e; font-size: 13px; margin-top: 10px; }
 
-.dark-footer {
-    display: block;
-    margin-top: 30px;
-    color: #8892b0;
-    font-size: 13px;
-    text-align: center;
-}
+/* Sliders */
+input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+input[type=range]:focus { outline: none; }
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #2a3d63; border-radius: 4px; }
+input[type=range]::-webkit-slider-thumb { height: 24px; width: 24px; border-radius: 50%; background: #ffcc00; cursor: pointer; -webkit-appearance: none; margin-top: -8px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
+input[type=range]::-moz-range-track { width: 100%; height: 8px; cursor: pointer; background: #2a3d63; border-radius: 4px; }
+input[type=range]::-moz-range-thumb { height: 24px; width: 24px; border: none; border-radius: 50%; background: #ffcc00; cursor: pointer; box-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
 
-/* =========================================
-   MAIN CALCULATOR SCREEN SPECIFIC
-   ========================================= */
-.calculator-container {
-    width: 100%;
-    max-width: 900px; /* Wider for desktop */
-    padding: 20px;
-}
-
-.calc-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.calc-header h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.calc-header p {
-    color: #8892b0;
-    font-size: 16px;
-}
-
-.calc-card {
-    background-color: #0f1a2e;
-    border: 1px solid #1e2f4f;
-    border-radius: 16px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.calc-title {
-    font-size: 20px;
-    margin-bottom: 30px;
-}
-
-.slider-group {
-    margin-bottom: 40px;
-}
-
-.slider-labels {
-    margin-bottom: 15px;
-    font-size: 16px;
-}
-
-.range-limits {
-    display: flex;
-    justify-content: space-between;
-    color: #6a7b9e;
-    font-size: 13px;
-    margin-top: 10px;
-}
-
-/* Customizing the HTML Range Slider */
-input[type=range] {
-    -webkit-appearance: none;
-    width: 100%;
-    background: transparent;
-}
-
-input[type=range]:focus {
-    outline: none;
-}
-
-/* The slider track */
-input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 8px;
-    cursor: pointer;
-    background: #2a3d63; /* Darker track color */
-    border-radius: 4px;
-}
-
-/* The slider thumb (the circle) */
-input[type=range]::-webkit-slider-thumb {
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    background: #ffcc00;
-    cursor: pointer;
-    -webkit-appearance: none;
-    margin-top: -8px; /* Centers the thumb on the track */
-    box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
-}
-
-/* Firefox slider styles */
-input[type=range]::-moz-range-track {
-    width: 100%;
-    height: 8px;
-    cursor: pointer;
-    background: #2a3d63;
-    border-radius: 4px;
-}
-
-input[type=range]::-moz-range-thumb {
-    height: 24px;
-    width: 24px;
-    border: none;
-    border-radius: 50%;
-    background: #ffcc00;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
-}
-
-.result-box {
-    background-color: #15223d;
-    border: 1px solid #2a3d63;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.result-box p {
-    color: #8892b0;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.result-box h2 {
-    font-size: 36px;
-    margin: 0;
-}
+.result-box { background-color: #15223d; border: 1px solid #2a3d63; border-radius: 12px; padding: 30px; text-align: center; margin-bottom: 30px; }
+.result-box p { color: #8892b0; font-size: 16px; margin-bottom: 10px; }
+.result-box h2 { font-size: 36px; margin: 0; }
 
 /* =========================================
-   BUTTONS & FORMS (Shared)
+   FORM SCREEN SPECIFIC (Screenshot Match)
    ========================================= */
-.btn-primary {
-    width: 100%;
-    padding: 20px;
-    background-color: #ffcc00;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s;
-    text-transform: uppercase;
-}
+.progress-container { margin-bottom: 30px; }
+.progress-bar-track { width: 100%; height: 6px; background-color: #1e2f4f; border-radius: 3px; margin-bottom: 15px; overflow: hidden; }
+.progress-bar-fill { width: 33.33%; height: 100%; background-color: #ffcc00; border-radius: 3px; transition: width 0.3s ease; }
+.step-text { color: #8892b0; font-size: 14px; }
 
-.btn-primary:hover { background-color: #e6b800; }
+.form-card { padding: 30px; }
+.step-title { font-size: 22px; margin-bottom: 25px; }
 
-input[type="text"], input[type="tel"], select, textarea {
+.input-group { margin-bottom: 25px; text-align: left; }
+.input-group label { display: block; margin-bottom: 10px; color: #e2e8f0; font-size: 15px; }
+
+.dark-input, textarea {
     width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 16px;
     background-color: #172644;
-    border: 1px solid #23365c;
+    border: 1px solid #2a3d63;
     border-radius: 8px;
     font-size: 16px;
     color: white;
+    outline: none;
+    transition: border-color 0.2s;
 }
 
-input::placeholder, textarea::placeholder { color: #6a7b9e; }
+.dark-input:focus { border-color: #ffcc00; }
+.dark-input[readonly] { color: #8892b0; cursor: not-allowed; }
+input::placeholder, textarea::placeholder { color: #5a6f94; }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: #8892b0;
-    font-size: 14px;
+select.dark-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%238892b0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px top 50%;
+    background-size: 12px auto;
 }
 
-h4 { color: white; margin-bottom: 20px; font-size: 20px;}
+.btn-primary { width: 100%; padding: 18px; background-color: #ffcc00; color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.3s; text-transform: uppercase; margin-top: 10px; }
+.btn-primary:hover { background-color: #e6b800; }
 
-/* =========================================
-   FORM STEPS & LOADER
-   ========================================= */
-.progress-bar { text-align: center; margin-bottom: 30px; color: #ffcc00; font-weight: bold; }
+/* Form Steps */
 .form-step { display: none; width: 100%; }
 .form-step.active { display: block; }
 
-.loader {
-    border: 5px solid #172644;
-    border-top: 5px solid #ffcc00;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-    margin: 30px auto 0 auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+/* Loader */
+.loader { border: 5px solid #172644; border-top: 5px solid #ffcc00; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 30px auto 0 auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
