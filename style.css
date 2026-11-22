@@ -50,8 +50,15 @@ button {
     border: none;
     border-radius: 5px;
     font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
+    
+    /* This spaces the flag and the text nicely */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
 }
 
 button:hover { background-color: #e6b800; }
