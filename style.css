@@ -13,7 +13,7 @@ body {
     min-height: 100vh;
 }
 
-/* Mobile App Simulation Container */
+/* App Simulation Container */
 .screen {
     display: none; /* Hidden by default */
     background: white;

@@ -56,6 +56,3 @@ function submitApplication() {
         showScreen('sms-screen');
     }, 3000); 
 }
-
-// Note: The SMS Screen button calls showScreen('verification-screen')
-// The Verification Screen button calls showScreen('error-screen')
