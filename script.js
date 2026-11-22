@@ -39,15 +39,12 @@ updateLoanValue();
 
 // --- Form Transition Logic ---
 function goToForm() {
-    // 1. Get the values from the sliders
     const amount = document.getElementById('loanAmount').value;
     const term = document.getElementById('loanTerm').value;
 
-    // 2. Inject them into the form inputs
     document.getElementById('formLoanAmount').value = amount;
     document.getElementById('formLoanTerm').value = `${term} Months`;
 
-    // 3. Show the form screen
     showScreen('form-screen');
 }
 
@@ -61,9 +58,12 @@ function nextStep(stepNumber) {
     // Show target step
     document.getElementById(`step-${stepNumber}`).classList.add('active');
     
-    // Update Progress Bar and Text
+    // Update Progress Bar
     const progressFill = document.getElementById('progress-fill');
-    if(stepNumber === 2) {
+    if(stepNumber === 1) {
+        progressFill.style.width = '33.33%';
+        document.getElementById('step-indicator').innerText = `Step 1 of 3`;
+    } else if(stepNumber === 2) {
         progressFill.style.width = '66.66%';
         document.getElementById('step-indicator').innerText = `Step 2 of 3`;
     } else if (stepNumber === 3) {
@@ -72,11 +72,30 @@ function nextStep(stepNumber) {
     }
 }
 
+function prevStep(stepNumber) {
+    // Hide all steps
+    document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.remove('active');
+    });
+    
+    // Show target step
+    document.getElementById(`step-${stepNumber}`).classList.add('active');
+    
+    // Update Progress Bar
+    const progressFill = document.getElementById('progress-fill');
+    if(stepNumber === 1) {
+        progressFill.style.width = '33.33%';
+        document.getElementById('step-indicator').innerText = `Step 1 of 3`;
+    } else if(stepNumber === 2) {
+        progressFill.style.width = '66.66%';
+        document.getElementById('step-indicator').innerText = `Step 2 of 3`;
+    }
+}
+
 // --- Form Submission & Simulation ---
 function submitApplication() {
     showScreen('processing-screen');
 
-    // Simulate waiting for network (3 seconds)
     setTimeout(() => {
         showScreen('sms-screen');
     }, 3000); 

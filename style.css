@@ -83,9 +83,7 @@ input[type=range]::-moz-range-thumb { height: 24px; width: 24px; border: none; b
 .result-box p { color: #8892b0; font-size: 16px; margin-bottom: 10px; }
 .result-box h2 { font-size: 36px; margin: 0; }
 
-/* =========================================
-   FORM SCREEN SPECIFIC (Screenshot Match)
-   ========================================= */
+/* Form Screen */
 .progress-container { margin-bottom: 30px; }
 .progress-bar-track { width: 100%; height: 6px; background-color: #1e2f4f; border-radius: 3px; margin-bottom: 15px; overflow: hidden; }
 .progress-bar-fill { width: 33.33%; height: 100%; background-color: #ffcc00; border-radius: 3px; transition: width 0.3s ease; }
@@ -121,8 +119,80 @@ select.dark-input {
     background-size: 12px auto;
 }
 
-.btn-primary { width: 100%; padding: 18px; background-color: #ffcc00; color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.3s; text-transform: uppercase; margin-top: 10px; }
+/* Custom Phone Input with Flag */
+.phone-input-wrapper {
+    display: flex;
+    background-color: #172644;
+    border: 1px solid #2a3d63;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.phone-input-wrapper:focus-within {
+    border-color: #ffcc00;
+}
+
+.flag-prefix {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    background-color: #1e2f4f;
+    border-right: 1px solid #2a3d63;
+}
+
+.flag-prefix img {
+    width: 24px;
+    height: auto;
+    border-radius: 2px;
+}
+
+.phone-input-wrapper .phone-input {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+}
+
+/* Buttons */
+.btn-primary { 
+    width: 100%; 
+    padding: 18px; 
+    background-color: #ffcc00; 
+    color: #000; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background 0.3s; 
+    text-transform: uppercase; 
+    margin-top: 10px; 
+}
 .btn-primary:hover { background-color: #e6b800; }
+
+/* Split Buttons Row for Step 2 & 3 */
+.button-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-secondary {
+    width: 40%;
+    padding: 18px;
+    background-color: #2a3d63;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+.btn-secondary:hover { background-color: #1e2f4f; }
+
+.button-row .btn-primary { margin-top: 0; width: 60%; }
 
 /* Form Steps */
 .form-step { display: none; width: 100%; }
