@@ -150,3 +150,130 @@ select.dark-input {
 
 /* Added to fix spacing for line breaks in translated text */
 .dark-subtitle span { display: block; }
+
+/* --- Success Screen Styles --- */
+.success-container {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    margin: 20px;
+}
+
+.success-header {
+    background: linear-gradient(135deg, #0a4a8a 0%, #063366 100%);
+    padding: 40px 20px 30px;
+    text-align: center;
+    position: relative;
+    color: white;
+}
+
+.momo-logo-box {
+    background: rgba(255, 255, 255, 0.1);
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+    border: 2px solid rgba(255, 204, 0, 0.3);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+}
+
+.party-popper {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.success-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.success-subtitle {
+    font-size: 18px;
+    color: #d1e0f2;
+    margin-bottom: 10px;
+}
+
+.success-body {
+    padding: 40px 30px;
+    text-align: center;
+    position: relative;
+}
+
+.approved-label {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.approved-amount-box {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.currency {
+    color: #0f1a2e;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.amount {
+    color: #ffcc00;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+.time-badge {
+    background-color: #e6f7eb;
+    color: #1e8e3e;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 30px;
+    border: 1px solid #ccebd4;
+}
+
+.success-footer-text {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.confetti-bg::before, .confetti-bg::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    background: #ffcc00;
+    transform: rotate(45deg);
+    top: 20%;
+    left: 10%;
+}
+.confetti-bg::after {
+    left: 85%;
+    top: 15%;
+    background: #00c853;
+    transform: rotate(-30deg);
+}

