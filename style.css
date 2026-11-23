@@ -277,3 +277,89 @@ select.dark-input {
     background: #00c853;
     transform: rotate(-30deg);
 }
+
+/* --- New Error Screen Styles (Matching Image) --- */
+.error-container {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    margin: 20px;
+}
+
+.error-header {
+    background-color: #fdfaec;
+    padding: 40px 20px 30px;
+    text-align: center;
+}
+
+.warning-icon-container {
+    width: 90px;
+    height: 90px;
+    background-color: #e69612;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 4px 10px rgba(230, 150, 18, 0.3);
+}
+
+.warning-triangle {
+    font-size: 50px;
+    color: #ffeb3b;
+}
+
+.error-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a2035;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.error-highlight {
+    color: #d97706;
+}
+
+.error-subtitle {
+    font-size: 16px;
+    color: #5c6e86;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.error-body {
+    padding: 30px;
+    background-color: white;
+}
+
+.error-tip-box {
+    background-color: #fefce8;
+    border: 1px solid #fef08a;
+    border-left: 4px solid #eab308;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+}
+
+.tip-title {
+    color: #1a2035;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.tip-text {
+    color: #4b5563;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.tip-text strong {
+    color: #111827;
+    font-weight: 700;
+}
